@@ -1,15 +1,18 @@
 import { useState } from "react"
 
-const AddCategory = () => {
+export const AddCategory = ({onNewCategory}) => {
 
-    const [inputValue, setInputValue] = useState('One Piece')
+    const [inputValue, setInputValue] = useState('')
 
     const onInputChange = ({target}) => {
-        setInputValue(target.value)
+        setInputValue( target.value )
     }
     const onSubmit = (event) => {
         event.preventDefault()
-        console.log(inputValue);
+        if( inputValue.trim().length <= 1 ) return;
+
+        setInputValue('')
+        onNewCategory(inputValue.trim())
     }
     return (
         <form onSubmit={onSubmit}>
@@ -22,4 +25,4 @@ const AddCategory = () => {
     )
 }
 
-export default AddCategory
+
